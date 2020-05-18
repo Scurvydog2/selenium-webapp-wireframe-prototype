@@ -1,0 +1,82 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+    <div >
+      <p >Name:<input type='text' value="Google search"></p>
+      <p >ID:6561{{products}}</p>
+      <div><p>Module Type:</p>
+        <input type="radio" id="Suite" name="Type" value="Suite">
+        <label for="Suite">Suite</label>
+        <input type="radio" id="Scenario" name="Type" value="Scenario">
+        <label for="Scenario">Scenario</label>
+        <input type="radio" id="Test" name="Type" value="Test">
+        <label for="Test">Test  </label>
+        <input type="radio" id="Module" name="Type" value="Module" checked=true>
+        <label for="Module">Module  </label>
+      
+         </div>
+         <div>
+           <button (click)='addStep()'>Add Step</button>
+           <select id="step" [(ngModel)]="selectedLevel">
+            <option value="1">Open</option>
+            <option value="2">Click</option>
+            <option value="3">Select dropdown</option>
+            <option value="4">Select checkbox/radio</option>
+            <option value="5">Enter text</option>
+            <option value="6">Verify value</option>
+          </select>
+         </div>
+         <div>
+           <input type="submit" 
+           (click)='save()' value="Save the Module">
+         </div>
+    </div>
+    
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='products && products.length'>
+        <thead>
+          <tr>
+            <th>
+              
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let product of products'>
+            
+            <td>
+              
+              <div *ngIf='product.stepType==1'>Open <input type="text"></div>
+              <div *ngIf='product.stepType==2'>Click (screen)
+                <select >
+                <option value="1">google</option>
+                <option value="2">yahoo</option>
+              </select>
+                field <select >
+                  <option value="1">search</option>
+                  <option value="2">I'm feeling lucky</option>
+                </select>
+            </div>
+              <div *ngIf='product.stepType==3'>select (screen) (dropdown) value</div>
+              <div *ngIf='product.stepType==4'>select (screen) (options) values[multiselect dropdown]</div>
+              <div *ngIf='product.stepType==5'>Enter <input type="text"> in (screen) <select >
+                <option value="1">search bar</option>
+              </select> </div>
+              <div *ngIf='product.stepType==6'>Verify (screen) <select >
+                <option value="1">tab1</option>
+                <option value="2">tab2</option>
+              </select> has value of <input type="text"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf='errorMessage'
+     class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
